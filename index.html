@@ -3,386 +3,410 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Internal Audit - Lead Auditor Briefing</title>
+    <title>CompTIA Security+ Exam Simulator V3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap');
-
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            font-family: 'Sarabun', sans-serif;
-            background-color: #121212;
-            color: #e0e0e0;
-            overflow: hidden;
+        :root {
+            --primary-color: #1e293b;
+            --secondary-color: #2563eb;
+            --bg-color: #f1f5f9;
+            --text-color: #334155;
+            --correct-bg: #dcfce7;
+            --correct-border: #22c55e;
+            --correct-text: #166534;
+            --card-bg: #ffffff;
         }
 
-        .slider-container {
-            width: 100%;
-            height: calc(100% - 70px); /* เผื่อพื้นที่ให้ปุ่มด้านล่าง */
-            position: relative;
-        }
-
-        .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-            transform: translateY(20px);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            box-sizing: border-box;
-            background: radial-gradient(circle at center, #1f1f2e 0%, #121212 100%);
-            z-index: 0;
-        }
-
-        .slide.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-            z-index: 1;
-        }
-
-        .content-box {
-            max-width: 950px;
-            width: 100%;
-            background: rgba(30, 30, 40, 0.85);
-            padding: 45px;
-            border-radius: 12px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            border-top: 5px solid #cf142b;
-            backdrop-filter: blur(10px);
-        }
-
-        .session-badge {
-            background-color: #cf142b;
-            color: white;
-            padding: 6px 18px;
-            border-radius: 20px;
-            font-size: 1.1em;
-            font-weight: 600;
-            display: inline-block;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        h1 {
-            font-size: 2.4em;
-            color: #ffffff;
-            margin-top: 0;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #333;
-            padding-bottom: 15px;
-        }
-
-        h2 {
-            font-size: 1.6em;
-            color: #a0a0b5;
-            font-weight: 400;
-            margin-top: 0;
-        }
-
-        .detail-row {
-            display: flex;
-            margin-top: 20px;
-            font-size: 1.3em;
+        body {
+            font-family: 'Kanit', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
         }
 
-        .detail-label {
-            width: 180px;
-            font-weight: 600;
-            color: #cf142b;
-        }
-
-        .detail-value {
-            flex: 1;
-            color: #e0e0e0;
-        }
-
-        .criteria-box {
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid #333;
-            padding: 15px 25px;
-            border-radius: 8px;
-            margin-top: 30px;
-            font-size: 1.2em;
-        }
-
-        .highlight {
-            color: #ff4d4d;
-            font-weight: 600;
-        }
-
-        /* ---------------- Button Controls ---------------- */
-        .controls {
-            position: fixed;
-            bottom: 0;
-            left: 0;
+        .container {
+            max-width: 900px;
             width: 100%;
-            height: 70px;
-            background-color: #0a0a0f;
+        }
+
+        .header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 40px;
-            box-sizing: border-box;
-            border-top: 1px solid #222;
-            z-index: 10;
+            flex-wrap: wrap;
+            gap: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        .btn-group {
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .header .status {
+            font-size: 1.1rem;
+            font-weight: 500;
+            background: rgba(255,255,255,0.15);
+            padding: 6px 16px;
+            border-radius: 20px;
+        }
+
+        /* Upload Area */
+        #upload-container {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            border: 2px dashed #cbd5e1;
+        }
+
+        #upload-container input[type="file"] {
+            display: block;
+            margin: 20px auto;
+            font-size: 1.1rem;
+            font-family: 'Kanit', sans-serif;
+            padding: 10px;
+            background: #f8fafc;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        /* Exam Area */
+        .card {
+            background-color: var(--card-bg);
+            padding: 35px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        .question-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-top: 0;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .choice {
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            background-color: #f8fafc;
+            font-size: 1.05rem;
+        }
+
+        .choice.correct {
+            background-color: var(--correct-bg);
+            border-color: var(--correct-border);
+            color: var(--correct-text);
+            font-weight: 500;
+            box-shadow: 0 2px 5px rgba(34, 197, 94, 0.2);
+        }
+
+        .explanation {
+            margin-top: 35px;
+            padding: 20px 25px;
+            background-color: #f1f5f9;
+            border-left: 5px solid var(--secondary-color);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .explanation h4 {
+            margin-top: 0;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .controls {
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--card-bg);
+            padding: 20px 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            flex-wrap: wrap;
             gap: 15px;
         }
 
         button {
-            font-family: 'Sarabun', sans-serif;
-            font-size: 1.1em;
-            font-weight: 600;
-            padding: 10px 25px;
+            font-family: 'Kanit', sans-serif;
+            background-color: var(--primary-color);
+            color: white;
             border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: 500;
             border-radius: 6px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: opacity 0.2s;
         }
 
-        .btn-nav {
-            background-color: #333;
-            color: #fff;
+        button:hover:not(:disabled) {
+            opacity: 0.9;
+            background-color: var(--secondary-color);
         }
 
-        .btn-nav:hover {
-            background-color: #555;
-        }
-
-        .btn-nav:disabled {
-            background-color: #222;
-            color: #555;
+        button:disabled {
+            background-color: #cbd5e1;
             cursor: not-allowed;
         }
 
-        .btn-end {
-            background-color: #cf142b;
-            color: #fff;
+        .jump-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .btn-end:hover {
-            background-color: #a00d20;
-            transform: scale(1.05);
-        }
-
-        .page-indicator {
-            color: #888;
-            font-size: 1.1em;
+        .jump-box input {
+            font-family: 'Kanit', sans-serif;
+            padding: 10px 15px;
+            width: 80px;
+            border: 2px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 1rem;
+            text-align: center;
+            outline: none;
         }
     </style>
 </head>
 <body>
 
-    <div class="slider-container">
-        
-        <!-- Slide 1: หน้าปก -->
-        <div class="slide active">
-            <div class="content-box" style="text-align: center;">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Ricoh_logo.svg/512px-Ricoh_logo.svg.png" alt="Ricoh Logo" style="height: 50px; margin-bottom: 20px; filter: brightness(0) invert(1);">
-                <h1 style="border:none; padding:0; margin-bottom: 5px;">Internal Audit Execution</h1>
-                <h2>Lead Auditor Section Briefing</h2>
-                <div style="margin-top: 40px; font-size: 1.4em; color: #bbb;">
-                    <p><span class="highlight">Lead Auditor:</span> K.Arnon</p>
-                    <p><span class="highlight">Auditor member:</span> K.Khanatsanant, K.Pawitchat, K.Rich</p>
-                    <p><span class="highlight">Date:</span> 08 July 2026</p>
-                    <p><span class="highlight">Location:</span> CSD Office Building B1 & B2</p>
-                </div>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Domain: CompTIA Security+ SY0-701</h1>
+            <div class="status" id="status-text">รออัปโหลดข้อสอบ...</div>
+        </div>
+
+        <!-- หน้าอัปโหลดไฟล์ -->
+        <div id="upload-container">
+            <h2>อัปโหลดไฟล์ข้อสอบของคุณ (V3)</h2>
+            <p>1. ก๊อปปี้ข้อสอบทั้งหมดไปวางใน Notepad แล้ว Save เป็นไฟล์ <b>.txt</b><br>
+               2. กดปุ่มด้านล่างเพื่ออัปโหลดไฟล์ <b>.txt</b> นั้นเข้าสู่ระบบครับ</p>
+            <input type="file" id="file-input" accept=".txt" />
+        </div>
+
+        <!-- Exam Area -->
+        <div class="card" id="exam-container" style="display:none;">
+            <h3 class="question-title" id="q-title"></h3>
+            <div class="question-text" id="q-text"></div>
+            
+            <div id="choices-container"></div>
+            
+            <div class="explanation" id="explanation-container">
+                <h4>คำอธิบายเหตุผล</h4>
+                <div id="explanation-text"></div>
             </div>
         </div>
 
-        <!-- Slide 2: กติกา (สั้นๆ) -->
-        <div class="slide">
-            <div class="content-box">
-                <h1>Audit Ground Rules</h1>
-                <ul style="font-size: 1.4em; line-height: 2; color: #ddd;">
-                    <li><strong>Sampling Method:</strong> การตรวจใช้วิธีการสุ่มข้อมูลภายใต้เวลาที่กำหนด</li>
-                    <li><strong>Audit Findings:</strong> ประเมินผลในระดับ Major NC, Minor NC, OFI และ Observation</li>
-                    <li><strong>Confidentiality (NDA):</strong> รักษาความลับขั้นสูงสุด งดบันทึกภาพ/เสียงโดยไม่ได้รับอนุญาต</li>
-                    <li><strong>Rights:</strong> ผู้รับการตรวจมีสิทธิชี้แจงหลักฐานก่อนสรุปข้อค้นพบเสมอ</li>
-                </ul>
+        <!-- Controls -->
+        <div class="controls" id="controls-container" style="display:none;">
+            <button id="btn-back">◄ ย้อนกลับ</button>
+            <div class="jump-box">
+                <input type="number" id="jump-input" placeholder="เลขข้อ">
+                <button id="btn-jump" style="background-color: #64748b;">ไป (Jump)</button>
             </div>
+            <button id="btn-next">ถัดไป ►</button>
         </div>
-
-        <!-- Slide 3: เช้า -->
-        <div class="slide">
-            <div class="content-box">
-                <div class="session-badge">09:00 – 12:00 (Morning Session)</div>
-                <h1>Asset & Configuration Management</h1>
-                
-                <div class="detail-row">
-                    <div class="detail-label">🏢 Auditee:</div>
-                    <div class="detail-value">
-                        <strong>Config Mgmt:</strong> K.Tanakom (Mgr), K.Ronnachai<br>
-                        <strong>InnoX:</strong> K.Suwan
-                    </div>
-                </div>
-                <div class="detail-row">
-                    <div class="detail-label">🔍 Auditor:</div>
-                    <div class="detail-value">K.Arnon (Lead), K.Khanatsanant, K.Pawitchat</div>
-                </div>
-
-                <div class="criteria-box">
-                    <strong style="color: #cf142b;">📋 Audit Criteria (ISO/IEC 20000-1:2018):</strong><br>
-                    • 8.2.5 Asset management<br>
-                    • 8.2.6 Configuration management
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 4: บ่าย 1 -->
-        <div class="slide">
-            <div class="content-box">
-                <div class="session-badge">13:30 – 14:30 (Afternoon Session 1)</div>
-                <h1>Supplier Management & Security</h1>
-                
-                <div class="detail-row">
-                    <div class="detail-label">🏢 Auditee:</div>
-                    <div class="detail-value">
-                        <strong>Supplier Mgmt:</strong> K.Prasit (Mgr), K.Kanjana, K.Paweennuch
-                    </div>
-                </div>
-                <div class="detail-row">
-                    <div class="detail-label">🔍 Auditor:</div>
-                    <div class="detail-value">K.Arnon (Lead), K.Khanatsanant, K.Pawitchat</div>
-                </div>
-
-                <div class="criteria-box">
-                    <strong style="color: #cf142b;">📋 Audit Criteria:</strong><br>
-                    • <strong>ISO 20000-1:</strong> 8.3.4 Supplier management, 8.2.3 Control of parties<br>
-                    • <strong>ISO 27001:</strong> A5.19 IS in supplier relationships, A5.20 IS within supplier agreements
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 5: บ่าย 2 -->
-        <div class="slide">
-            <div class="content-box">
-                <div class="session-badge">14:30 – 16:30 (Afternoon Session 2)</div>
-                <h1>Budgeting, Demand & Capacity</h1>
-                
-                <div class="detail-row">
-                    <div class="detail-label">🏢 Auditee:</div>
-                    <div class="detail-value">
-                        <strong>Demand Mgmt:</strong> K.Khanatsanan (Mgr), K.Pawitchat<br>
-                        <strong>Capacity Mgmt:</strong> K.Wiyawat (Mgr), K.Niphun, K.Kunakorn, K.Montri, K.Monchai, K.Ronnachai<br>
-                        <strong>InnoX:</strong> K.Suwan
-                    </div>
-                </div>
-                <div class="detail-row">
-                    <div class="detail-label">🔍 Auditor:</div>
-                    <div class="detail-value">K.Arnon (Lead), K.Rich</div>
-                </div>
-
-                <div class="criteria-box">
-                    <strong style="color: #cf142b;">📋 Audit Criteria:</strong><br>
-                    • <strong>ISO 20000-1:</strong> 8.4.1 Budgeting, 8.4.2 Demand, 8.4.3 Capacity management<br>
-                    • <strong>ISO 27001:</strong> A8.6 Capacity management
-                </div>
-            </div>
-        </div>
-
-        <!-- Slide 6: สรุปจบ -->
-        <div class="slide">
-            <div class="content-box" style="text-align: center;">
-                <h1 style="border: none;">End of Audit Sections</h1>
-                <p style="font-size: 1.5em; color: #a0a0b5; margin-top: 20px;">
-                    Thank you for your cooperation.<br>ขอบคุณผู้รับการตรวจทุกท่านที่ให้ความร่วมมือครับ
-                </p>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- Navigation Bar ด้านล่าง -->
-    <div class="controls">
-        <div class="btn-group">
-            <button class="btn-nav" id="btn-prev" onclick="prevSlide()">❮ ย้อนกลับ</button>
-            <button class="btn-nav" id="btn-next" onclick="nextSlide()">ถัดไป ❯</button>
-        </div>
-        
-        <div class="page-indicator" id="page-indicator">Slide 1 of 6</div>
-        
-        <button class="btn-end" onclick="endPresentation()">✖ จบการนำเสนอ</button>
     </div>
 
     <script>
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        const totalSlides = slides.length;
-        
-        const btnPrev = document.getElementById('btn-prev');
-        const btnNext = document.getElementById('btn-next');
-        const pageIndicator = document.getElementById('page-indicator');
+        let questionsList = [];
+        let currentIndex = 0;
 
-        function updateUI() {
-            // ควบคุมการแสดงผล Slide
-            slides.forEach((slide, index) => {
-                if (index === currentSlide) {
-                    slide.classList.add('active');
-                } else {
-                    slide.classList.remove('active');
+        // ระบบอ่านไฟล์
+        document.getElementById('file-input').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const text = e.target.result;
+                processText(text);
+            };
+            reader.readAsText(file);
+        });
+
+        // ฟังก์ชันประมวลผลข้อความ (แก้บั๊กรวบยอดข้อสอบเรียบร้อยแล้ว!)
+        function processText(text) {
+            const normalizedText = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+            const lines = normalizedText.split('\n');
+            
+            const questions = [];
+            let currentQ = null;
+            let phase = 'q'; 
+
+            for (let i = 0; i < lines.length; i++) {
+                let line = lines[i].trim();
+                if (!line) continue;
+
+                // จับหมายเลขข้อ (รองรับทั้ง "คำถาม 1" และ "531.")
+                const qMatch = line.match(/^(?:คำถาม(?:ที่)?\s*(\d+)|^(\d+)\.\s)/);
+                
+                // ถ้านี่คือบรรทัดที่บอกเลขข้อใหม่ ให้สร้าง Object ใหม่ทันที!
+                if (qMatch) {
+                    let parsedId = parseInt(qMatch[1] || qMatch[2]);
+                    let isNewQuestion = false;
+
+                    // เช็คว่าเป็นข้อใหม่จริงๆ ใช่ไหม (ป้องกันการเจอเลขข้อหลอกในคำอธิบาย)
+                    if (!currentQ) {
+                        isNewQuestion = true;
+                    } else if (line.startsWith("คำถาม")) {
+                        isNewQuestion = true;
+                    } else if (parsedId > currentQ.id) {
+                        isNewQuestion = true;
+                    }
+
+                    if (isNewQuestion) {
+                        if (currentQ) questions.push(currentQ);
+                        
+                        let cleanedLine = line.replace(/^(?:คำถาม(?:ที่)?\s*\d+\s*\(.*?\)\s*|\d+\.\s*)/, '');
+                        
+                        currentQ = {
+                            id: parsedId,
+                            text: cleanedLine ? cleanedLine + '<br>' : '',
+                            choices: [],
+                            correctLetters: [],
+                            explanation: ''
+                        };
+                        phase = 'q';
+                        continue;
+                    }
                 }
+
+                if (!currentQ) continue;
+
+                // จับตัวเลือก (a. b. c. d.)
+                const cMatch = line.match(/^([a-z])\.\s/i);
+                if (cMatch && phase !== 'e') {
+                    phase = 'c';
+                    currentQ.choices.push({
+                        letter: cMatch[1].toLowerCase(),
+                        text: line
+                    });
+                    continue;
+                }
+
+                // จับเฉลยและคำอธิบาย
+                if (line.match(/^(เฉลย|คำอธิบาย|เหตุผล)/)) {
+                    phase = 'e';
+                    if (line.startsWith('เฉลย:')) {
+                        const lettersMatch = line.match(/([a-z])\./ig);
+                        if (lettersMatch) {
+                            currentQ.correctLetters = lettersMatch.map(m => m.replace('.', '').toLowerCase());
+                        }
+                    }
+                    currentQ.explanation += line + '<br><br>';
+                    continue;
+                }
+
+                // เก็บข้อความต่อท้าย
+                if (phase === 'q') {
+                    currentQ.text += line + '<br>';
+                } else if (phase === 'e') {
+                    currentQ.explanation += line + '<br>';
+                } else if (phase === 'c') {
+                    if(currentQ.choices.length > 0) {
+                        currentQ.choices[currentQ.choices.length - 1].text += ' ' + line;
+                    }
+                }
+            }
+            
+            if (currentQ) questions.push(currentQ);
+            
+            if (questions.length > 1) {
+                questionsList = questions.sort((a, b) => a.id - b.id);
+                alert("🎉 โหลดสำเร็จ! ระบบสแกนพบข้อสอบทั้งหมด " + questionsList.length + " ข้อครับ!");
+                document.getElementById('upload-container').style.display = 'none';
+                document.getElementById('exam-container').style.display = 'block';
+                document.getElementById('controls-container').style.display = 'flex';
+                renderQuestion(0);
+            } else if (questions.length === 1) {
+                alert("ระบบเจอปัญหาครับ! มันรวบข้อสอบทั้งหมดกลายเป็นข้อ 1 ข้อเดียวเลย (ไม่มีหน้า 2) ลองเช็คการเว้นบรรทัดในไฟล์ Text ดูนะครับ");
+            } else {
+                alert("อ่านไฟล์ไม่สำเร็จครับ ไม่พบข้อสอบเลย");
+            }
+        }
+
+        // ฟังก์ชันแสดงข้อสอบ
+        function renderQuestion(index) {
+            const q = questionsList[index];
+            document.getElementById('q-title').innerText = "ข้อที่ " + q.id;
+            document.getElementById('q-text').innerHTML = q.text;
+            
+            const choicesContainer = document.getElementById('choices-container');
+            choicesContainer.innerHTML = '';
+            
+            q.choices.forEach(c => {
+                const choiceDiv = document.createElement('div');
+                choiceDiv.className = 'choice';
+                if (q.correctLetters.includes(c.letter)) {
+                    choiceDiv.classList.add('correct');
+                }
+                choiceDiv.innerText = c.text;
+                choicesContainer.appendChild(choiceDiv);
             });
 
-            // อัปเดตตัวเลขหน้า
-            pageIndicator.innerText = `Slide ${currentSlide + 1} of ${totalSlides}`;
+            document.getElementById('explanation-text').innerHTML = q.explanation;
+            document.getElementById('status-text').innerText = "สถานะ: ข้อ " + q.id + " / " + questionsList.length;
 
-            // ควบคุมสถานะปุ่ม (Disabled ถ้าสุดทาง)
-            btnPrev.disabled = currentSlide === 0;
-            btnNext.disabled = currentSlide === totalSlides - 1;
+            document.getElementById('btn-back').disabled = (index === 0);
+            document.getElementById('btn-next').disabled = (index === questionsList.length - 1);
+            document.getElementById('jump-input').value = q.id;
         }
 
-        function nextSlide() {
-            if (currentSlide < totalSlides - 1) {
-                currentSlide++;
-                updateUI();
-            }
-        }
-
-        function prevSlide() {
-            if (currentSlide > 0) {
-                currentSlide--;
-                updateUI();
-            }
-        }
-
-        function endPresentation() {
-            // คำสั่งปิดหน้าต่าง
-            let confirmEnd = confirm("คุณต้องการจบการนำเสนอและปิดหน้าต่างนี้ใช่หรือไม่?");
-            if(confirmEnd) {
-                window.close(); // หมายเหตุ: เบราว์เซอร์บางตัวอาจบล็อกคำสั่งนี้หากไม่ได้เปิดด้วย Script
-                // ใส่ข้อความสำรองกรณีเบราว์เซอร์ไม่ยอมปิดหน้าต่างอัตโนมัติ
-                document.body.innerHTML = "<div style='display:flex; justify-content:center; align-items:center; height:100vh; color:#fff; font-family:sans-serif; font-size:2em; background-color:#121212;'>กรุณากดกากบาท (X) ด้านบนเพื่อปิดหน้าต่างครับ</div>";
-            }
-        }
-
-        // รองรับการกดปุ่มลูกศรบนคีย์บอร์ดด้วย
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === 'Space') {
-                nextSlide();
-            } else if (e.key === 'ArrowLeft') {
-                prevSlide();
+        // ปุ่มควบคุม
+        document.getElementById('btn-next').addEventListener('click', () => {
+            if (currentIndex < questionsList.length - 1) {
+                currentIndex++;
+                renderQuestion(currentIndex);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         });
 
-        // กำหนดสถานะเริ่มต้น
-        updateUI();
+        document.getElementById('btn-back').addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                renderQuestion(currentIndex);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+
+        document.getElementById('btn-jump').addEventListener('click', () => {
+            const jumpVal = parseInt(document.getElementById('jump-input').value);
+            const targetIndex = questionsList.findIndex(q => q.id === jumpVal);
+            if (targetIndex !== -1) {
+                currentIndex = targetIndex;
+                renderQuestion(currentIndex);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                alert("ไม่พบข้อ " + jumpVal + " ในระบบครับ");
+            }
+        });
+
+        document.getElementById('jump-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') document.getElementById('btn-jump').click();
+        });
     </script>
 </body>
 </html>
