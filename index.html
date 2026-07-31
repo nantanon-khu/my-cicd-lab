@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CYBERPUNK MATRIX - Phod Pho</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <title>Cyberpunk CI/CD Portal - Phod Pho</title>
+    <!-- นำเข้า Google Font สไตล์ล้ำๆ -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Prompt:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -13,9 +14,9 @@
         }
 
         body {
-            background-color: #020205;
-            font-family: 'Share Tech Mono', monospace;
-            color: #00ffcc;
+            background-color: #030712;
+            font-family: 'Prompt', 'Orbitron', sans-serif;
+            color: #f3f4f6;
             height: 100vh;
             display: flex;
             align-items: center;
@@ -24,183 +25,137 @@
             position: relative;
         }
 
-        /* ตารางเส้นกริดไซเบอร์พื้นหลัง */
-        .cyber-grid {
+        /* เอฟเฟกต์แสงนีออนพื้นหลังแบบเคลื่อนไหว */
+        .bg-glow {
             position: absolute;
-            width: 200%;
-            height: 200%;
-            background-image: 
-                linear-gradient(rgba(0, 255, 204, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 204, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
-            transform: perspective(500px) rotateX(60deg);
-            animation: gridMove 20s linear infinite;
-            z-index: -2;
-        }
-
-        @keyframes gridMove {
-            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
-            100% { transform: perspective(500px) rotateX(60deg) translateY(40px); }
-        }
-
-        /* แสงนีออนสไตล์เรฟโวลูชันหมุนวน */
-        .neon-orb-1, .neon-orb-2 {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            z-index: -1;
-            opacity: 0.6;
-        }
-
-        .neon-orb-1 {
-            width: 350px;
-            height: 350px;
-            background: #ff007f;
-            top: 10%;
-            left: 20%;
-            animation: floatOrb1 8s ease-in-out infinite alternate;
-        }
-
-        .neon-orb-2 {
             width: 400px;
             height: 400px;
-            background: #00ffcc;
-            bottom: 10%;
-            right: 20%;
-            animation: floatOrb2 10s ease-in-out infinite alternate;
+            background: linear-gradient(135deg, #3b82f6 0%, #ec4899 100%);
+            filter: blur(120px);
+            border-radius: 50%;
+            z-index: -1;
+            animation: pulseGlow 6s infinite alternate;
         }
 
-        @keyframes floatOrb1 {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(80px, 50px) scale(1.2); }
+        @keyframes pulseGlow {
+            0% { transform: scale(1) translate(-50px, -50px); opacity: 0.5; }
+            100% { transform: scale(1.3) translate(50px, 50px); opacity: 0.8; }
         }
 
-        @keyframes floatOrb2 {
-            0% { transform: translate(0, 0) scale(1.2); }
-            100% { transform: translate(-70px, -60px) scale(0.9); }
-        }
-
-        /* กล่องโฮโลแกรมกระจกแก้วใส */
-        .hologram-box {
-            background: rgba(3, 7, 18, 0.75);
-            backdrop-filter: blur(12px);
-            border: 2px solid #00ffcc;
-            border-radius: 16px;
-            padding: 45px;
-            width: 480px;
+        /* กล่องดีไซน์กระจกฝ้า (Glassmorphism) */
+        .glass-card {
+            background: rgba(17, 24, 39, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            width: 450px;
             text-align: center;
-            box-shadow: 0 0 30px rgba(0, 255, 204, 0.3),
-                        inset 0 0 20px rgba(0, 255, 204, 0.2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8),
+                        inset 0 0 15px rgba(255, 255, 255, 0.05);
             position: relative;
-            clip-path: polygon(0 0, 95% 0, 100% 8%, 100% 100%, 5% 100%, 0 92%);
+            animation: floatCard 4s ease-in-out infinite;
         }
 
-        /* มุมตัดเท่ๆ แบบไซเบอร์ */
-        .hologram-box::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 3px;
-            background: linear-gradient(90deg, #ff007f, #00ffcc, #ff007f);
-            animation: scanline 3s linear infinite;
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
-        @keyframes scanline {
-            0% { background-position: 0 0; }
-            100% { background-position: 480px 0; }
-        }
-
-        .system-tag {
-            font-family: 'Orbitron', sans-serif;
-            background: rgba(255, 0, 127, 0.2);
-            color: #ff007f;
-            border: 1px dashed #ff007f;
-            padding: 6px 14px;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
+        .badge {
             display: inline-block;
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
             text-transform: uppercase;
         }
 
         h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.2rem;
-            font-weight: 900;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
-        }
-
-        .subtitle {
-            font-size: 1.1rem;
-            color: #a7f3d0;
-            margin-bottom: 30px;
-            letter-spacing: 1px;
-        }
-
-        /* ปุ่มนีออนกระพริบระเบิดแสง */
-        .cyber-btn {
-            background: transparent;
-            color: #00ffcc;
-            border: 2px solid #00ffcc;
-            padding: 14px 35px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1rem;
+            font-size: 1.8rem;
             font-weight: 700;
-            letter-spacing: 2px;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #60a5fa, #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(96, 165, 250, 0.3);
+        }
+
+        p {
+            color: #9ca3af;
+            font-size: 0.95rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* ปุ่มกดเรืองแสงล้ำๆ */
+        .neon-btn {
+            background: linear-gradient(135deg, #2563eb 0%, #db2777 100%);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
-            position: relative;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(219, 39, 119, 0.4);
             text-decoration: none;
             display: inline-block;
-            box-shadow: 0 0 15px rgba(0, 255, 204, 0.4);
-            text-shadow: 0 0 8px rgba(0, 255, 204, 0.6);
         }
 
-        .cyber-btn:hover {
-            background: #00ffcc;
-            color: #020205;
-            box-shadow: 0 0 30px #00ffcc, 0 0 60px #00ffcc;
-            transform: translateY(-3px);
+        .neon-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.8),
+                        0 0 10px rgba(219, 39, 119, 0.8);
         }
 
-        .metrics {
-            margin-top: 35px;
+        .status-footer {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #4b5563;
             display: flex;
-            justify-content: space-around;
-            border-top: 1px solid rgba(0, 255, 204, 0.2);
-            padding-top: 20px;
-            font-size: 0.9rem;
-            color: #6ee7b7;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
-        .metric-value {
-            color: #ff007f;
-            font-weight: bold;
-            font-family: 'Orbitron', sans-serif;
-            text-shadow: 0 0 8px rgba(255, 0, 127, 0.6);
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #10b981;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
         }
     </style>
 </head>
 <body>
 
-    <div class="cyber-grid"></div>
-    <div class="neon-orb-1"></div>
-    <div class="neon-orb-2"></div>
+    <div class="bg-glow"></div>
 
-    <div class="hologram-box">
-        <div class="system-tag">DEVSECOPS // ACTIVE_SECURE</div>
-        <h1>PHOD PHO</h1>
-        <div class="subtitle">SECURITY MATRIX & CI/CD PIPELINE ONLINE</div>
+    <div class="glass-card">
+        <div class="badge">CI/CD Pipeline Active</div>
+        <h1>PHOD PHO LAB</h1>
+        <p>ระบบอัตโนมัติทำงานสมบูรณ์แบบ 100% ขับเคลื่อนด้วย GitHub Actions & GCP ปลอดภัยด้วยมาตรฐาน HTTPS</p>
         
-        <a href="https://github.com/nantanon-khu" target="_blank" class="cyber-btn">ACCESS CORE</a>
+        <a href="https://github.com/nantanon-khu" target="_blank" class="neon-btn">EXPLORE GITHUB</a>
 
-        <div class="metrics">
-            <div>GATEWAY: <span class="metric-value">SECURE</span></div>
-            <div>STATUS: <span class="metric-value">100%</span></div>
+        <div class="status-footer">
+            <div class="dot"></div>
+            <span>System Online & Secured by Let's Encrypt</span>
         </div>
     </div>
 
